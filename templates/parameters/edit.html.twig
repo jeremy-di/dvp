@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Parameters{% endblock %}
+
+{% block body %}
+    <div class="para_container">
+        <h1>Modifier</h1>
+
+        {{ include('parameters/_form.html.twig', {'button_label': 'Valider'}) }}
+
+        <a class="para_other_btn" href="{{ path('app_home') }}">Retour</a>
+
+        {{ include('parameters/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

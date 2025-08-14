@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parameters{% endblock %}
+
+{% block body %}
+    <h1>Parameters</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ parameter.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ parameter.date ? parameter.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>StepOfDay</th>
+                <td>{{ parameter.stepOfDay }}</td>
+            </tr>
+            <tr>
+                <th>Systole</th>
+                <td>{{ parameter.systole }}</td>
+            </tr>
+            <tr>
+                <th>Diastole</th>
+                <td>{{ parameter.diastole }}</td>
+            </tr>
+            <tr>
+                <th>Spo2</th>
+                <td>{{ parameter.spo2 }}</td>
+            </tr>
+            <tr>
+                <th>HeartRate</th>
+                <td>{{ parameter.heartRate }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_parameters_index') }}">back to list</a>
+
+    <a href="{{ path('app_parameters_edit', {'id': parameter.id}) }}">edit</a>
+
+    {{ include('parameters/_delete_form.html.twig') }}
+{% endblock %}

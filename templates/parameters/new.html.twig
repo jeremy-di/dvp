@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Parameters{% endblock %}
+
+{% block body %}
+    <div class="para_container">
+        <h1>Ajouter des paramètres</h1>
+
+        {{ include('parameters/_form.html.twig') }}
+
+        <a class="para_other_btn" href="{{ path('app_home') }}">Retour</a>
+    </div>
+{% endblock %}

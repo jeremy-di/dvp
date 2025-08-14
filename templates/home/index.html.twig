@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="para_list_container">
+    <h1>Liste des paramètres</h1>
+
+    <div class="para_new_button">
+        <a href="{{ path('app_parameters_new') }}">Ajouter <i class="fa-solid fa-plus"></i></a>
+    </div>
+    <div class="card-container">
+        {% for parameter in parameters %}
+            <div class="card">
+                <p>Date : <span>{{ parameter.date ? parameter.date|date('d/m/y') : '' }}</span></p>
+                <p>Prise : <span>{{ parameter.stepOfDay }}</span></p>
+                <p>SYST : <span class="{% if parameter.systole < 80 %}danger{% endif %}{% if parameter.systole >= 80 and parameter.systole <= 130 %}normal{% endif %}{% if parameter.systole > 130 %}danger{% endif %}">{{ parameter.systole }}</span></p>
+                <p>DIAS : <span>{{ parameter.diastole }}</span></p>
+                <p>SPO² : <span class="{% if parameter.spo2 < 94 %}danger{% endif %}{% if parameter.spo2 >= 94 and parameter.spo2 <= 100 %}normal{% endif %}">{{ parameter.spo2 }}</span></p>
+                <p>FC : <span class="{% if parameter.heartRate < 50 %}danger{% endif %}{% if parameter.heartRate >= 50 and parameter.systole <= 150 %}normal{% endif %}{% if parameter.systole > 150 %}danger{% endif %}">{{ parameter.heartRate }}</span></p>
+                <a class="para_list_button" href="{{ path('app_parameters_edit', {'id': parameter.id}) }}">Editer</a>
+            </div>
+        {% else %}
+            <div class="card">
+                <p class="danger">Pas de paramètres</p>
+            </div>
+        {% endfor %}
+    </div>
+        
+</div>
+{% endblock %}

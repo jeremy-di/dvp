@@ -1,3 +1,230 @@
-body {
-    background-color: skyblue;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+body { font-family: "Lato", sans-serif; }
+:root { --header-h: 56px; }
+
+header {
+  position: sticky; /* évite le débordement d'un header absolute */
+  top: 0; left: 0; width: 100%;
+  height: var(--header-h);
+  background-color: #F5A61D; color: #fff;
+  z-index: 1000;
 }
+nav {
+  height: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1rem;
+}
+.logo { font-size: 1.75rem; color: inherit; text-decoration: none; }
+
+.basculer {
+  display: none; /* visible en mobile */
+  font-size: 1.75rem; background: transparent; border: 0; color: inherit; cursor: pointer;
+}
+.ouvrir { display: inline-block; }
+.fermer { display: none; }
+
+/* Menu desktop: plus de width fixe -> flex, gap, s'adapte */
+.menu {
+  list-style: none; display: flex; align-items: center; gap: .5rem;
+}
+.menu li a {
+  color: #fff; text-decoration: none; background-color: #000;
+  font-size: 1rem; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block;
+}
+
+.card {
+        border: solid 2px #F5A61D;
+        width: 60%;
+        padding: 1rem;
+        margin: auto;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+    }
+
+.card p {
+    font-weight: bold;
+}
+
+.card span {
+    font-weight: lighter;
+}
+
+.danger {
+    color: red;
+}
+
+.normal {
+    color: green;
+}
+
+/* ------------------- Mobile ------------------- */
+@media (max-width: 1100px) {
+  .basculer { display: inline-flex; align-items: center; justify-content: center; }
+
+  /* swap icônes burger/croix quand body a .open */
+  body.open .ouvrir { display: none; }
+  body.open .fermer { display: inline-block; }
+
+  /* Menu en panneau coulissant plein écran (sous le header) */
+  .menu {
+    position: fixed;
+    top: var(--header-h); left: 0; right: 0; bottom: 0;
+    background-color: #F5A61D;
+    flex-direction: column; justify-content: space-around;
+    padding: 2rem 1rem;
+    transform: translateX(100%);
+    transition: transform .25s ease;
+    z-index: 999;
+  }
+  body.open .menu { transform: translateX(0); }
+  /* Quand on revient en mobile sans être "open", rester caché même si hidden a été retiré côté desktop */
+  .menu[hidden] { display: flex; } /* permet au JS d'animer même si hidden = false */
+  .menu li a { font-size: 2rem; }
+
+  .para_container {
+        border: solid 2px #F5A61D;
+        text-align: center;
+        margin-top: 5rem;
+        padding: 1rem;
+    }
+
+    .para_container h1 {
+        margin-bottom: 1rem;
+    }
+
+    .para_label {
+        display: block;
+        margin-bottom: 1rem;
+    }
+    
+    .para_input {
+        width: 100%;
+        font-size: 2rem;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+    }
+
+    .para_btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 5px;
+        background-color: #F5A61D;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 2rem;
+    }
+    
+    .para_other_btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 5px;
+        background-color: green;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 2rem;
+        text-decoration: none;
+        display: block;
+    }
+    .para_delete_btn {
+        width: 100%;
+        font-size: 1rem;
+        padding: 1rem;
+        border-radius: 5px;
+        background-color: red;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 2rem;
+        text-decoration: none;
+        display: block;
+    }
+
+    .para_list_container {
+        margin-top: 5rem;
+        text-align: center;
+    }
+
+    .card {
+        border: solid 2px #F5A61D;
+        width: 60%;
+        padding: 1rem;
+        margin: auto;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+    }
+
+    .card p {
+        font-weight: bold;
+    }
+
+    .card span {
+        font-weight: lighter;
+    }
+
+    .danger {
+        color: red;
+    }
+
+    .normal {
+        color: green;
+    }
+
+    .para_list_button {
+        text-decoration: none;
+        background-color: green;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        margin-top: 1rem;
+    }
+
+    .para_new_button {
+        background-color: #F5A61D;
+        padding: 1em;
+        margin: auto;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        color: #fff;
+        width: 25%;
+    }
+    
+    .para_new_button a {
+        color: #fff;
+        text-decoration: none;
+        
+    }
+}
+
+/* -------------- Tes blocs "para_*" avec corrections anti-débordement -------------- */
+.para_container {
+  border: solid 2px #F5A61D; text-align: center; margin-top: 5rem; padding: 1rem;
+}
+.para_label { display: block; margin-bottom: 1rem; }
+.para_input { width: 100%; font-size: 2rem; border-radius: 5px; margin-bottom: 1rem; }
+.para_btn, .para_other_btn {
+  width: 100%; font-size: 1rem; padding: 1rem; border-radius: 5px; font-weight: bold; color: #fff; margin-bottom: 2rem;
+}
+.para_btn { background-color: #F5A61D; }
+.para_other_btn { background-color: green; text-decoration: none; display: block; }
+
+.para_list_container { margin-top: 5rem; text-align: center; overflow-x: auto; }
+.para_list_container table { margin: auto; border-collapse: collapse; min-width: 520px; }
+.para_list_container thead tr { background-color: #F5A61D; }
+.para_list_container tbody tr td { border: solid 1px #F5A61D; padding: 0.5em; }
+
+/* Fix majeur: évite le débordement horizontal (100vh -> auto/max 100%) */
+.para_list_button {
+  text-decoration: none; background-color: green; padding: 0.5em; color: #fff; font-weight: bold;
+  display: inline-block; width: auto; max-width: 100%;
+}
+
+/* Bouton "nouveau" adaptable */
+.para_new_button {
+  background-color: #F5A61D; padding: 1em; margin: 1rem auto; border-radius: 5px; color: #fff;
+  width: clamp(160px, 50%, 320px); text-align: center;
+}
+.para_new_button a { color: #fff; text-decoration: none; }
+
